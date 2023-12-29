@@ -27,8 +27,9 @@ const Tasks = () => {
   function handleCreateTask() {
     let input = document.getElementById("inputTask") as HTMLInputElement;
     let inputValue: string = input.value;
-    if (inputValue.length > 0) {
-      let newTask: Task = new Task(capitalizeFirstLetter(inputValue));
+    let formatedValue: string = handleFormatterString(inputValue);
+    if (formatedValue.length > 0) {
+      let newTask: Task = new Task(formatedValue);
       setTasks([...tasks, newTask]);
     }
     input.value = "";
@@ -41,6 +42,27 @@ const Tasks = () => {
 
   function capitalizeFirstLetter(str: string): string {
     return str.replace(/^\w/, (c) => c.toUpperCase());
+  }
+
+  function trimWhiteSpaces(str: string) {
+    let array = str.split(" ");
+    while (array[0] === "") {
+      array.shift();
+    }
+
+    while (array[array.length - 1] === "") {
+      array.pop();
+    }
+
+    let string = array.join(" ");
+
+    return string;
+  }
+
+  function handleFormatterString(str: string): string {
+    let newStr = trimWhiteSpaces(str);
+    newStr = capitalizeFirstLetter(newStr);
+    return newStr;
   }
 
   return (
@@ -58,6 +80,7 @@ const Tasks = () => {
             key={task.id}
             task={task}
             handleSetTasks={handleSetTasks}
+            handleFormatter={handleFormatterString}
             tasks={tasks}
           />
         ))}
