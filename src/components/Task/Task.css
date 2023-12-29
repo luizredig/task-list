@@ -1,8 +1,9 @@
 .task {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding-left: 10px;
+  padding: 0 10px;
   height: 40px;
   border: 1px solid #61dbfb;
   border-radius: 6px;
@@ -11,7 +12,7 @@
 }
 
 .task:hover {
-  transform: scale(1.02);
+  box-shadow: 0 0 10px -1px #61dcfb94;
 }
 
 .task.completed {
@@ -20,4 +21,26 @@
 
 .task.canceled {
   border: 1px solid #ca3030;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.button {
+  max-width: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  filter: brightness(1.2);
+}
+
+.button:hover {
+  transform: scale(1.2);
+}
+
+.button:active {
+  transform: scale(0.8);
 }

@@ -5,7 +5,14 @@ import TaskComponent from "../Task/Task";
 import { useState } from "react";
 
 const Tasks = () => {
-  let [tasks, setTasks] = useState<Task[]>([]);
+  let [tasks, setTasks] = useState<Task[]>([
+    {
+      id: 0,
+      description: 'Example task',
+      completed: false,
+      canceled: false
+    }
+]);
 
   let pendingTasks = tasks.filter((task) => {
     return !(task.completed || task.canceled);
@@ -22,8 +29,10 @@ const Tasks = () => {
       document.getElementById("inputTask") as HTMLInputElement
     );
     let inputValue: string = input.value;
-    let newTask: Task = new Task(capitalizeFirstLetter(inputValue));
-    setTasks([...tasks, newTask]);
+    if (inputValue.length > 0) {
+      let newTask: Task = new Task(capitalizeFirstLetter(inputValue));
+      setTasks([...tasks, newTask]);
+    }
     input.value = "";
     input.focus();
   }
