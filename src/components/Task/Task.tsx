@@ -1,10 +1,10 @@
 import { Task } from "../../models/Task";
 import "./Task.css";
 
-const TaskComponent = (props: { task: Task }) => {
+const TaskComponent = (props: { task: Task; status?: string }) => {
   return (
     <>
-      <div className="task">{props.task.description}</div>
+      <div className={`task ` + props.status}>{props.task.description}</div>
     </>
   );
 };

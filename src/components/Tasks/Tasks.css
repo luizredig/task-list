@@ -45,7 +45,6 @@ main {
 .container button:hover {
   border: 2px solid #61dbfb;
   background-color: #61dbfb;
-  transform: scale(1.05);
 }
 
 .container button:active {
