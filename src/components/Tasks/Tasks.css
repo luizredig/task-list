@@ -11,6 +11,7 @@ main {
   max-width: max-content;
   border: 3px solid #61dbfb;
   border-radius: 20px;
+  margin-bottom: 50px;
 }
 
 .container input {
@@ -29,7 +30,7 @@ main {
   border-color: #b4b4b4;
 }
 
-.container button {
+.container .create-button {
   margin-left: 5px;
   text-align: center;
   height: 34px;
@@ -42,13 +43,13 @@ main {
   transition: all 0.3s;
 }
 
-.container button:hover {
+.container .create-button:hover {
   border: 2px solid #61dbfb;
   background-color: #61dbfb;
   cursor: pointer;
 }
 
-.container button:active {
+.container .create-button:active {
   transform: scale(0.95);
 }
 

@@ -7,27 +7,25 @@ import { useState } from "react";
 const Tasks = () => {
   let [tasks, setTasks] = useState<Task[]>([
     {
-      id: 0,
-      description: 'Example task',
+      id: -1,
+      description: "Example task",
       completed: false,
-      canceled: false
-    }
-]);
+      canceled: false,
+    },
+  ]);
 
   let pendingTasks = tasks.filter((task) => {
-    return !(task.completed || task.canceled);
+    return !task.completed && !task.canceled;
   });
   let completedTasks = tasks.filter((task) => {
-    return task.completed;
+    return task.completed && !task.canceled;
   });
   let canceledTasks = tasks.filter((task) => {
-    return task.canceled;
+    return task.canceled && !task.completed;
   });
 
   function handleCreateTask() {
-    let input = (
-      document.getElementById("inputTask") as HTMLInputElement
-    );
+    let input = document.getElementById("inputTask") as HTMLInputElement;
     let inputValue: string = input.value;
     if (inputValue.length > 0) {
       let newTask: Task = new Task(capitalizeFirstLetter(inputValue));
@@ -35,6 +33,10 @@ const Tasks = () => {
     }
     input.value = "";
     input.focus();
+  }
+
+  function handleSetTasks(tasks: Task[]) {
+    setTasks(tasks);
   }
 
   function capitalizeFirstLetter(str: string): string {
@@ -46,21 +48,38 @@ const Tasks = () => {
       <div className="container">
         <h3 className="filter-title">New task</h3>
         <input type="text" id="inputTask" />
-        <button onClick={handleCreateTask}>Create</button>
+        <button className="create-button" onClick={handleCreateTask}>
+          Create
+        </button>
         <hr />
         <h3 className="filter-title">Pending tasks</h3>
         {pendingTasks.map((task) => (
-          <TaskComponent key={task.id} task={task} />
+          <TaskComponent
+            key={task.id}
+            task={task}
+            handleSetTasks={handleSetTasks}
+            tasks={tasks}
+          />
         ))}
         <hr />
         <h3 className="filter-title">Completed tasks</h3>
         {completedTasks.map((task) => (
-          <TaskComponent key={task.id} task={task} status="completed" />
+          <TaskComponent
+            key={task.id}
+            task={task}
+            status="completed"
+            tasks={tasks}
+          />
         ))}
         <hr />
         <h3 className="filter-title">Canceled tasks</h3>
         {canceledTasks.map((task) => (
-          <TaskComponent key={task.id} task={task} status="canceled" />
+          <TaskComponent
+            key={task.id}
+            task={task}
+            status="canceled"
+            tasks={tasks}
+          />
         ))}
       </div>
     </>
