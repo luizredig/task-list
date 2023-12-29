@@ -1,0 +1,10 @@
+.task {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  padding-left: 10px;
+  height: 40px;
+  border: 1px solid #61dbfb;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
